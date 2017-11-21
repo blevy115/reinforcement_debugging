@@ -1,13 +1,26 @@
 def select_cards(possible_cards, hand)
 
-  possible_cards.each do |current_card|
+  until hand.count == 3
+  possible_cards.cycle do |current_card|
     print "Do you want to pick up #{current_card}?"
     answer = gets.chomp
     if answer.downcase == 'y'
+      if hand.include? (current_card)
+        puts "Hand already contains that card"
+      else
+      if hand.count < 3
       hand << current_card
+      if hand.count == 3
+        return hand
+      end
+    else
+      puts "Card could not be selected, hand is at max capacity."
+    end
     end
   end
-  return hand
+end
+end
+return hand
 
 end
 
